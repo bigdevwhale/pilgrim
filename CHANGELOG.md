@@ -6,7 +6,7 @@ line "<!-- tg", then 2-4 short lines in Russian for users (what is new, what is 
 then close it like any HTML comment. The release notes carry it, and the chat bot posts those lines.
 -->
 
-## [Unreleased]
+## [1.0.0] - 2026-10-25
 
 ### Added
 - Places of power from OpenStreetMap: houses of worship of every faith, wayside chapels, springs, trees, stones, heights; "here" by each place's radius.
@@ -17,3 +17,9 @@ then close it like any HTML comment. The release notes carry it, and the chat bo
 - A weekly rumour of one place nearby, shown on the map as a vague circle; home found by nights.
 - The book: notebooks per town, walks of three places or more, the year's circle with a name of your own, and the year's scroll.
 - EN and RU; demo build; community links in settings.
+
+<!-- tg
+Новое приложение — «Подорожная»: книжка паломника с печатями за десять минут в месте силы
+Храм, мечеть, синагога, родник, старое дерево — посидите там без телефона, и печать ваша: цвет чернил от солнца, следы от погоды
+Записки в щели, свои места карандашом, слух недели о месте рядом, хождения и круг года
+-->
