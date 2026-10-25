@@ -21,6 +21,8 @@ import android.os.PowerManager
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
+import android.util.Log
+import app.pilgrim.BuildConfig
 import app.pilgrim.MainActivity
 import app.pilgrim.R
 import app.pilgrim.container
@@ -154,7 +156,8 @@ class SitService : Service(), SensorEventListener {
             rules.screen(false, startedAt)
         }
         here = Here(this, 4000L) { f ->
-            val m = Geo.distance(LatLon(f.lat, f.lon), target.at)
+            // The demo's places are in Kazan wherever the phone is: there, only a faked location is checked.
+            val m = if (BuildConfig.DEMO) 0.0 else Geo.distance(LatLon(f.lat, f.lon), target.at)
             if (f.accuracy <= SitRules.ROUGH) lastMetres = m
             rules.fix(System.currentTimeMillis(), m, f.accuracy, f.mock)
             publish()
@@ -207,6 +210,7 @@ class SitService : Service(), SensorEventListener {
 
     private fun finish() {
         finished = true
+        Log.i("Pilgrim", "sitting over: ${rules.phase} ${rules.why ?: ""} after ${rules.sat / 1000} s")
         handler.removeCallbacks(tick)
         val phase = rules.phase
         val state = SitState(target, phase, rules.why, rules.sat, null, lastMetres)
