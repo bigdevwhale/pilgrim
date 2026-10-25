@@ -146,9 +146,10 @@ fun PilgrimRoot(settings: Settings) {
     val go = remember(nav) { Go(nav) }
     val route = nav.currentBackStackEntryAsState().value?.destination?.route
 
-    // A sitting in progress always shows; a finished one opens its stamp.
+    // A sitting in progress always shows; a finished one opens its stamp once the book has it
+    // (the stamp is written a moment after the sitting ends, and reaches the book later still).
     val session by Session.state.collectAsStateWithLifecycle()
-    LaunchedEffect(session?.phase, session?.sittingId, route) {
+    LaunchedEffect(session?.phase, session?.sittingId, route, sittings.size) {
         val s = session ?: return@LaunchedEffect
         when {
             s.phase == Phase.DONE && s.sittingId != 0L && home.stamp(s.sittingId) != null -> {
